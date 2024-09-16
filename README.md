@@ -5,18 +5,17 @@
 I'm Huynh from Vietnam, and I develop mobile applications focusing on Embedded (C, Linux)
 ## Skills and Experience:
 ### Platform
-* Flutter
-* React Native
+* STM32Cube IDE
+* Keil C
+* Keil C
 ### Operating System
-* IOS
-* Android
+* FreeRTOS
+* Linux
 ### Programming Language
-*  Dart
-*  Java
-*  Swift
-*  Kotlin
+*  C/C++
+*  Python
 ### Design
-* UI/UX
+* PCB Layout
   
 ## Profile
 <a href="https://www.facebook.com/profile.php?id=100008807208674" target="blank">
@@ -31,12 +30,12 @@ I'm Huynh from Vietnam, and I develop mobile applications focusing on Embedded (
   <a href="https://www.facebook.com/nickyxoandev/" target="blank">
     <img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" alt="nguyennhathuynh-facebook" />
   </a>
-  <a href="https://www.youtube.com/@xoandev" target="blank">
+  <!--<a href="https://www.youtube.com/@xoandev" target="blank">
     <img src="https://img.icons8.com/bubbles/100/000000/youtube-squared.png" alt="nguyennhathuynh-youtube" />
   </a>
   <a href="https://www.linkedin.com/in/nguyen-nhat-huynh-xd" target="blank">
     <img src="https://img.icons8.com/bubbles/100/000000/linkedin.png" alt="nguyennhathuynh-linkedin" />
-  </a>
+  </a> -->
 <!--   <a href="#" target="blank">
     <img src="https://img.icons8.com/bubbles/100/000000/instagram.png" alt="nguyennhathuynh-instagram" />
   </a> -->
