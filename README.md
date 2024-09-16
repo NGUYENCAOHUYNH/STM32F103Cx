@@ -2,7 +2,7 @@
 
 # ![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=30&duration=1000&pause=500&color=FF9999&vCenter=true&&multiline=true&random=false&width=1200&height=60&lines=Hi+there!,+My+name+is+Nguyen+Cao+Huynh👋)
 
-I'm Huynh from Vietnam, and I develop mobile applications focusing on Embedded (C, Linux)
+I'm Huynh from Vietnam, and I focusing on Embedded (C, Linux)
 ## Skills and Experience:
 ### Platform
 * STM32Cube IDE
