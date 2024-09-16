@@ -27,7 +27,7 @@ I'm Huynh from Vietnam, and I focusing on Embedded (C/C++, Linux)
 <br>
 <!-- https://icons8.com -->
 <div align="center">
-  <a href="[(https://www.facebook.com/profile.php?id=100008807208674)]" target="blank">
+  <a href="(https://www.facebook.com/profile.php?id=100008807208674)" target="blank">
     <img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" alt="nguyennhathuynh-facebook" />
   </a>
   <!--<a href="https://www.youtube.com/@xoandev" target="blank">
