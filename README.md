@@ -1,4 +1,4 @@
-![Design and Development](https://media.licdn.com/dms/image/v2/D5622AQElf-tUfA1KXw/feedshare-shrink_800/feedshare-shrink_800/0/1726502965269?e=1729123200&v=beta&t=izT3lcTNS1Rl0c8vjsfqGOXpf46-MHY2qmDL4OhdSCw)
+![Design and Development](https://www.google.com/url?sa=i&url=https%3A%2F%2Fcareer.fpt-software.com%2Ffpt-automotive%2F&psig=AOvVaw2YgrJI5DdfDZZ1XSCOKPX6&ust=1726589096346000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNjT89_rx4gDFQAAAAAdAAAAABAE)
 
 # ![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=30&duration=1000&pause=500&color=FF9999&vCenter=true&&multiline=true&random=false&width=1200&height=60&lines=Hi+there!,+My+name+is+Nguyen+Cao+Huynh👋)
 
