@@ -39,7 +39,7 @@ I'm Huynh from Vietnam, and I focusing on Embedded (C/C++, Linux)
     <img src="https://img.icons8.com/bubbles/100/000000/linkedin.png" alt="nguyennhathuynh-linkedin" />
   </a>
 <!--   <a href="#" target="blank">
-    <img src="https://img.icons8.com/bubbles/100/000000/instagram.png" alt="nguyennhathuynh-instagram" />
+    <img src="https://img.icons8.com/bubbles/100/000000/instagram.png" alt="huynhnguyen-instagram" />
   </a> -->
   <a href="mailto:nguyencaohuynh37@gmail.com" target="top">
     <img src="https://img.icons8.com/bubbles/100/000000/apple-mail.png" alt="nguyennhathuynh-email" />
