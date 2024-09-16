@@ -9,6 +9,7 @@ I'm Huynh from Vietnam, and I focusing on Embedded (C/C++, Linux)
 * Keil C
 * Visual Studio Code
 * Eclipse IDE
+* Altium Designer
 ### Operating System
 * FreeRTOS
 * Linux
