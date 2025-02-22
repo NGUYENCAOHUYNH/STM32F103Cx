@@ -1,0 +1,113 @@
+#include "stm32f4xx.h"
+
+void GPIO_Init(void);
+void TIM2_Init(void);
+void Motor_Start(uint8_t motor, uint8_t direction);
+void Motor_Stop(uint8_t motor);
+void Check_Limit_Switches(void);
+
+#define STEPS_PER_REV 200
+
+volatile uint8_t motor_direction[3] = {1, 1, 1}; // Hướng quay của từng động cơ
+volatile uint8_t motor_active[3] = {1, 1, 1};    // Trạng thái hoạt động của từng động cơ
+volatile uint8_t motor_stopped_by_switch[3] = {0, 0, 0}; // 1: Động cơ dừng do công tắc hành trình
+
+volatile uint8_t all_motors_stopped = 0; // Biến kiểm tra tất cả động cơ có dừng không
+
+int main(void) {
+    GPIO_Init();
+    TIM2_Init();
+
+    Motor_Start(0, 1);
+    Motor_Start(1, 1);
+    Motor_Start(2, 1);
+
+    while (1) {
+        Check_Limit_Switches();
+    }
+}
+
+void GPIO_Init(void) {
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN;
+
+    GPIOB->MODER |= GPIO_MODER_MODER0_0 | GPIO_MODER_MODER2_0 | GPIO_MODER_MODER4_0;
+    GPIOB->MODER &= ~(GPIO_MODER_MODER0_1 | GPIO_MODER_MODER2_1 | GPIO_MODER_MODER4_1);
+
+    GPIOB->MODER |= GPIO_MODER_MODER1_0 | GPIO_MODER_MODER3_0 | GPIO_MODER_MODER5_0;
+    GPIOB->MODER &= ~(GPIO_MODER_MODER1_1 | GPIO_MODER_MODER3_1 | GPIO_MODER_MODER5_1);
+
+    GPIOA->MODER &= ~(GPIO_MODER_MODER0 | GPIO_MODER_MODER1 | GPIO_MODER_MODER2);
+    GPIOA->PUPDR |= GPIO_PUPDR_PUPDR0_0 | GPIO_PUPDR_PUPDR1_0 | GPIO_PUPDR_PUPDR2_0;
+}
+
+void TIM2_Init(void) {
+    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+    TIM2->PSC = 4000 - 1;
+    TIM2->ARR = 10 - 1;
+    TIM2->DIER |= TIM_DIER_UIE;
+    TIM2->CR1 |= TIM_CR1_CEN;
+    NVIC_EnableIRQ(TIM2_IRQn);
+}
+
+void TIM2_IRQHandler(void) {
+    if (TIM2->SR & TIM_SR_UIF) {
+        TIM2->SR &= ~TIM_SR_UIF;
+
+        if (!all_motors_stopped) {
+            if (motor_active[0]) GPIOB->ODR ^= GPIO_ODR_OD0;
+            if (motor_active[1]) GPIOB->ODR ^= GPIO_ODR_OD2;
+            if (motor_active[2]) GPIOB->ODR ^= GPIO_ODR_OD4;
+        }
+    }
+}
+
+void Motor_Start(uint8_t motor, uint8_t direction) {
+    if (motor < 3) {
+        motor_direction[motor] = direction;
+        motor_active[motor] = 1;
+        motor_stopped_by_switch[motor] = 0;
+
+        uint16_t dir_pin = (motor == 0) ? GPIO_ODR_OD1 : (motor == 1) ? GPIO_ODR_OD3 : GPIO_ODR_OD5;
+        if (direction == 1) {
+            GPIOB->ODR |= dir_pin;
+        } else {
+            GPIOB->ODR &= ~dir_pin;
+        }
+    }
+}
+
+void Motor_Stop(uint8_t motor) {
+    if (motor < 3) {
+        motor_active[motor] = 0;
+        motor_stopped_by_switch[motor] = 1; // Đánh dấu động cơ đã dừng do công tắc hành trình
+        uint16_t step_pin = (motor == 0) ? GPIO_ODR_OD0 : (motor == 1) ? GPIO_ODR_OD2 : GPIO_ODR_OD4;
+        GPIOB->ODR &= ~step_pin;
+    }
+}
+
+void Check_Limit_Switches(void) {
+    uint8_t switch_pressed[3] = {
+        (GPIOA->IDR & GPIO_IDR_ID0) == 0,
+        (GPIOA->IDR & GPIO_IDR_ID1) == 0,
+        (GPIOA->IDR & GPIO_IDR_ID2) == 0
+    };
+
+    for (uint8_t i = 0; i < 3; i++) {
+        if (switch_pressed[i]) {
+            if (motor_active[i]) {
+                Motor_Stop(i);
+            }
+        } else {
+            if (motor_stopped_by_switch[i]) {
+                Motor_Start(i, motor_direction[i]); // Khởi động lại theo chiều cũ
+            }
+        }
+    }
+
+    if (motor_active[0] == 0 && motor_active[1] == 0 && motor_active[2] == 0) {
+        all_motors_stopped = 1;
+        GPIOB->ODR |= GPIO_ODR_OD1 | GPIO_ODR_OD3 | GPIO_ODR_OD5;
+    } else {
+        all_motors_stopped = 0;
+    }
+}
